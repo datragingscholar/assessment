@@ -57,7 +57,7 @@ class ConvertString extends Command
         if ($this->option('only-to-upper-case') && $this->option('only-to-alternate-case')) {
             $this->error('[-U|--only-to-upper-case] and [-A|--only-to-alternate-case] should not both be present');
 
-            exit(-1);
+            return -1;
         }
 
         $this->convertToAllUpperCaseIfRequired();

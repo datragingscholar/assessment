@@ -19,4 +19,13 @@ class ConvertStringTest extends TestCase
 
         $this->assertEquals('T,h,e,r,e,,s,h,o,u,l,d,,b,e,,c,o,d,e', trim(file_get_contents(getcwd() . '/test.csv')));
     }
+
+    public function test_command_should_refuse_to_run_with_wrong_options()
+    {
+        $this->artisan('string:convert', [
+            'string' => 'There should be code',
+            '-A' => true,
+            '-U' => true,
+        ])->assertExitCode(-1);
+    }
 }
