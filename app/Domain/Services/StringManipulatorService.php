@@ -13,7 +13,7 @@ class StringManipulatorService
         return $stringEntity;
     }
 
-    private static function toUpperCase(String $string) : String
+    protected static function toUpperCase(String $string) : String
     {
         return mb_convert_case($string, MB_CASE_UPPER, 'UTF-8');
     }
