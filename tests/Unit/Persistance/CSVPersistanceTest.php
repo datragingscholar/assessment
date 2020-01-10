@@ -27,7 +27,7 @@ class CSVPersistanceTest extends TestCase
 
     /**
      * @test
-     * @covers CSVPersistance::currentPath
+     * @covers CSVPersistance::setCSVFilePath
      */
     public function test_can_set_and_get_path()
     {
@@ -40,6 +40,7 @@ class CSVPersistanceTest extends TestCase
 
     /**
      * @test
+     * @covers CSVPersistance::currentCSVFilePath
      */
     public function test_path_should_be_valid()
     {
