@@ -10,9 +10,12 @@ use App\Domain\Entities\StringEntity;
 class CSVPersistanceTest extends TestCase
 {
     protected $tmpFiles = [];
+    protected $csvPersistance;
 
     public function setUp() : void
     {
+        $this->csvPersistance = new CSVPersistance(new StringFactory);
+
         register_shutdown_function(function () {
             foreach ($this->tmpFiles as $tmpFile)
             {
@@ -26,17 +29,13 @@ class CSVPersistanceTest extends TestCase
      * @test
      * @covers CSVPersistance::currentPath
      */
-    public function test_can_initialize_and_get_path()
+    public function test_can_set_and_get_path()
     {
         $tmpFilePath = sys_get_temp_dir() . '/path_test.csv';
-        $csvPersistance = new CSVPersistance(
-            new StringFactory,
-            //tempnam(sys_get_temp_dir(), 'PHPUnit') . '.csv'
-            $tmpFilePath
-        );
+        $this->csvPersistance->setCSVFilePath($tmpFilePath);
         $this->tmpFiles[] = $tmpFilePath;
 
-        $this->assertEquals($tmpFilePath, $csvPersistance->currentPath());
+        $this->assertEquals($tmpFilePath, $this->csvPersistance->currentCSVFilePath());
     }
 
     /**

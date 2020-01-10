@@ -10,28 +10,31 @@ use App\Domain\Entities\StringEntity;
 class CSVPersistance implements iStringPersistance
 {
     protected $stringFactory;
-    protected $path;
+    protected $csvFilePath;
 
-    public function __construct(StringFactory $stringFactory, $path)
+    public function __construct(StringFactory $stringFactory)
     {
         $this->stringFactory = $stringFactory;
-        $this->path = $path;
+    }
 
+    public function setCSVFilePath(String $csvFilePath) : void
+    {
+        $this->csvFilePath = $csvFilePath;
         $this->throwExceptionIfPathNotValid();
     }
 
-    protected function throwExceptionIfPathNotValid()
+    protected function throwExceptionIfPathNotValid() : void
     {
         try {
-            new \SplFileObject($this->path, 'a+');
+            new \SplFileObject($this->csvFilePath, 'a+');
         } catch (\Exception | \RuntimeException $e) {
-            throw new \InvalidArgumentException('The passed path, ' . $this->path . ', is not valid.');
+            throw new \InvalidArgumentException('The passed path, ' . $this->csvFilePath . ', is not valid.');
         }
     }
 
-    public function currentPath() : String
+    public function currentCSVFilePath() : String
     {
-        return $this->path;
+        return $this->csvFilePath;
     }
 
     public function persist(StringEntity $stringEntity) : Bool
