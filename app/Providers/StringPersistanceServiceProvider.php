@@ -19,7 +19,9 @@ class StringPersistanceServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->when('App\Persistance\CSVPersistance')
+            ->needs('$path')
+            ->give(getcwd() . '/test.csv');
     }
 
     /**
