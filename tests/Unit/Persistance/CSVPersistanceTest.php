@@ -82,7 +82,7 @@ class CSVPersistanceTest extends TestCase
 
     /**
      * @test
-     * @covers CSVPersistance::persist
+     * @covers CSVPersistance::read
      */
     public function test_should_not_read_when_path_is_invalid()
     {
