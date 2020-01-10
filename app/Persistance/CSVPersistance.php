@@ -13,6 +13,17 @@ class CSVPersistance
     {
         $this->stringFactory = $stringFactory;
         $this->path = $path;
+
+        $this->throwExceptionIfPathNotValid();
+    }
+
+    protected function throwExceptionIfPathNotValid()
+    {
+        try {
+            new \SplFileObject($this->path, 'a+');
+        } catch (\Exception | \RuntimeException $e) {
+            throw new \InvalidArgumentException('The passed path, ' . $this->path . ', is not valid.');
+        }
     }
 
     public function currentPath() : String
