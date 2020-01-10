@@ -8,19 +8,34 @@ use App\Domain\Entities\StringFactory;
 
 class CSVPersistanceTest extends TestCase
 {
+    protected $tmpFiles = [];
+
+    public function setUp() : void
+    {
+        register_shutdown_function(function () {
+            foreach ($this->tmpFiles as $tmpFile)
+            {
+                if (file_exists($tmpFile))
+                    unlink($tmpFile);
+            }
+        });
+    }
+
     /**
      * @test
      * @covers CSVPersistance::currentPath
      */
     public function test_can_initialize_and_get_path()
     {
-        $path = getcwd() . '/test.csv';
+        $tmpFilePath = sys_get_temp_dir() . '/testpath.csv';
         $csvPersistance = new CSVPersistance(
             new StringFactory,
-            $path
+            //tempnam(sys_get_temp_dir(), 'PHPUnit') . '.csv'
+            $tmpFilePath
         );
+        $this->tmpFiles[] = $tmpFilePath;
 
-        $this->assertEquals($path, $csvPersistance->currentPath());
+        $this->assertEquals($tmpFilePath, $csvPersistance->currentPath());
     }
 
     /**
