@@ -14,13 +14,14 @@ principles were utilized during development.
 ### Clone the Project
 
 ```
-git clone https://github.com/datragingscholar/assessment.git
+git clone https://github.com/datragingscholar/assessment.git && cd assessment
 ```
 
 ### Run the Command with `php artisan` after `composer update`
 
 ```
 composer update
+
 php artisan string:convert "hello world"
 HELLO WORLD
 hElLo wOrLd
