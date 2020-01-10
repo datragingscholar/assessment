@@ -63,6 +63,8 @@ class CSVPersistance implements iStringPersistance
 
     public function read() : StringEntity
     {
+        $this->throwExceptionIfPathNotValid();
+
         $reader = Reader::createFromPath($this->path, 'r');
         $record_data = $reader->fetchOne(0);
         $record_data = $this->repopulateEmptyElementWithWhiteSpace($record_data);

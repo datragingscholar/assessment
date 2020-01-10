@@ -85,6 +85,18 @@ class CSVPersistanceTest extends TestCase
 
     /**
      * @test
+     * @covers CSVPersistance::persist
+     */
+    public function test_should_not_read_when_path_is_invalid()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        $csvPersistance = new CSVPersistance(new StringFactory);
+        $csvPersistance->read();
+    }
+
+    /**
+     * @test
      * @covers CSVPersistance::read
      */
     public function test_can_correctly_read()
