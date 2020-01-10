@@ -3,6 +3,7 @@
 namespace App\Persistance;
 
 use League\Csv\Writer;
+use League\Csv\Reader;
 use App\Domain\Entities\StringFactory;
 use App\Domain\Entities\StringEntity;
 
@@ -53,5 +54,29 @@ class CSVPersistance
     protected function trimWhiteSpaceAsEmptyElement(Array $array) : Array
     {
         return array_map('trim', $array);
+    }
+
+    public function read() : StringEntity
+    {
+        $reader = Reader::createFromPath($this->path, 'r');
+        $record_data = $reader->fetchOne(0);
+        $record_data = $this->repopulateEmptyElementWithWhiteSpace($record_data);
+        $record_data = $this->reconstructCharacterSplitArrayToString($record_data);
+
+        return $this->stringFactory->makeFromString($record_data);
+    }
+
+    protected function repopulateEmptyElementWithWhiteSpace(Array $array) : Array
+    {
+        return array_map(function ($column) {
+            if (!$column) return ' ';
+
+            return $column;
+        }, $array);
+    }
+
+    protected function reconstructCharacterSplitArrayToString(Array $array) : String
+    {
+        return implode('', $array);
     }
 }
