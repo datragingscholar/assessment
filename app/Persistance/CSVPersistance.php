@@ -7,7 +7,7 @@ use League\Csv\Reader;
 use App\Domain\Entities\StringFactory;
 use App\Domain\Entities\StringEntity;
 
-class CSVPersistance
+class CSVPersistance implements iStringPersistance
 {
     protected $stringFactory;
     protected $path;
