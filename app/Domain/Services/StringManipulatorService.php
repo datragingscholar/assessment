@@ -8,8 +8,13 @@ class StringManipulatorService
 {
     public static function toAllUpperCase(StringEntity $stringEntity)
     {
-        $stringEntity->updateString(mb_convert_case($stringEntity->get(), MB_CASE_UPPER, 'UTF-8'));
+        $stringEntity->updateString(self::toUpperCase($stringEntity->get()));
 
         return $stringEntity;
+    }
+
+    private static function toUpperCase(String $string) : String
+    {
+        return mb_convert_case($string, MB_CASE_UPPER, 'UTF-8');
     }
 }
