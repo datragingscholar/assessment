@@ -11,13 +11,13 @@ principles were utilized during development.
 ***This project will be taken down after a week of publication.***
 
 ## Usage
-1. Clone the Project
+### Clone the Project
 
 ```
-git clone
+git clone https://github.com/datragingscholar/assessment.git
 ```
 
-2. Run the Command with `php artisan` after `composer update`
+### Run the Command with `php artisan` after `composer update`
 
 ```
 composer update
@@ -40,7 +40,7 @@ h,e,l,l,o,,w,o,r,l,d
 Please note that the whitespcae in the original string was trimmed to
 an empty column, this behavior is expected as per the requirement.
 
-3. Extra Options
+### Extra Options
 
 You can specify extra options to alter the behavior of this command.
 Use `-U` or `--only-to-upper-case` to stop the command from performing
@@ -55,15 +55,15 @@ will refuse to run***
 If you do not want to save the string to the CSV file, present `-D` or
 `--do-not-save` flag.
 
-4. Non-Latin and MulitiByte Support
+### Non-Latin and MultiByte Support
 
 This command supports German letters such as `àáâ`, non-latin letters
-such as `Τάχ`, as well as mulitibyte characters such as `尽ぃぅ`.
+such as `Τάχ`, as well as multibyte characters such as `尽ぃぅ`.
 
 ***Please refer to Known Issues for some known problems with encoding
 and languages***
 
-5. Run Tests
+### Run Tests
 
 ```
 #Run All Tests
