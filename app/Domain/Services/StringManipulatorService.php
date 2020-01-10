@@ -4,43 +4,41 @@ namespace App\Domain\Services;
 
 use App\Domain\Entities\StringEntity;
 
-class StringManipulatorService
+class StringManipulatorService implements iStringManipulator
 {
-    public static function toAllUpperCase(StringEntity $stringEntity)
+    public function toAllUpperCase(StringEntity $stringEntity) : void
     {
-        $stringEntity->updateString(self::toUpperCase($stringEntity->get()));
-
-        return $stringEntity;
+        $stringEntity->updateString($this->toUpperCase($stringEntity->get()));
     }
 
-    protected static function toUpperCase(String $string) : String
+    protected function toUpperCase(String $string) : String
     {
         return mb_convert_case($string, MB_CASE_UPPER, 'UTF-8');
     }
 
-    public static function toAlternateCase(StringEntity $stringEntity) : void
+    public function toAlternateCase(StringEntity $stringEntity) : void
     {
         $characters = mb_str_split($stringEntity->get());
 
         $result = '';
         foreach ($characters as $key => $character) {
             if ($key % 2 == 0) {
-                $result .= self::toLowerCase($character);
+                $result .= $this->toLowerCase($character);
                 continue;
             }
 
-            $result .= self::toUpperCase($character);
+            $result .= $this->toUpperCase($character);
         }
 
         $stringEntity->updateString($result);
     }
 
-    protected static function mb_str_split(String $string) : Array
+    protected function mb_str_split(String $string) : Array
     {
         return preg_split('/(?<!^)(?!$)/u', $string);
     }
 
-    protected static function toLowerCase(String $string) : String
+    protected function toLowerCase(String $string) : String
     {
         return mb_convert_case($string, MB_CASE_LOWER, 'UTF-8');
     }
