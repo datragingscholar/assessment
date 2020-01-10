@@ -5,6 +5,7 @@ namespace Tests\Unit\Persistance;
 use Tests\TestCase;
 use App\Persistance\CSVPersistance;
 use App\Domain\Entities\StringFactory;
+use App\Domain\Entities\StringEntity;
 
 class CSVPersistanceTest extends TestCase
 {
@@ -27,7 +28,7 @@ class CSVPersistanceTest extends TestCase
      */
     public function test_can_initialize_and_get_path()
     {
-        $tmpFilePath = sys_get_temp_dir() . '/testpath.csv';
+        $tmpFilePath = sys_get_temp_dir() . '/path_test.csv';
         $csvPersistance = new CSVPersistance(
             new StringFactory,
             //tempnam(sys_get_temp_dir(), 'PHPUnit') . '.csv'
@@ -49,5 +50,27 @@ class CSVPersistanceTest extends TestCase
             new StringFactory,
             'ao9e8hib, .9/ ]==/='
         );
+    }
+
+    /**
+     * @test
+     * @covers CSVPersistance::persist
+     */
+    public function test_can_correctly_persist()
+    {
+        $tmpFilePath = sys_get_temp_dir() . '/persist_test.csv';
+        $csvPersistance = new CSVPersistance(
+            new StringFactory,
+            $tmpFilePath
+        );
+        $this->tmpFiles[] = $tmpFilePath;
+
+        $stringEntity = new StringEntity('hello world');
+        $csvPersistance->persist($stringEntity);
+        $this->assertEquals('h,e,l,l,o,,w,o,r,l,d', trim(file_get_contents($tmpFilePath)));
+
+        $stringEntity = new StringEntity('白!,の日υπέρ is WhItê《！');
+        $csvPersistance->persist($stringEntity);
+        $this->assertEquals('白,!,",",の,日,υ,π,έ,ρ,,i,s,,W,h,I,t,ê,《,！', trim(file_get_contents($tmpFilePath)));
     }
 }
