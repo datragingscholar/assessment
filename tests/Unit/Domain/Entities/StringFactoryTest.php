@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Unit\Domain\Entities;
+
 use Tests\TestCase;
 use App\Domain\Entities\StringEntity;
 use App\Domain\Entities\StringFactory;
