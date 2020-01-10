@@ -22,4 +22,17 @@ class CSVPersistanceTest extends TestCase
 
         $this->assertEquals($path, $csvPersistance->currentPath());
     }
+
+    /**
+     * @test
+     */
+    public function test_path_should_be_valid()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        $this->csvPersistance = new CSVpersistance(
+            new StringFactory,
+            'ao9e8hib, .9/ ]==/='
+        );
+    }
 }
