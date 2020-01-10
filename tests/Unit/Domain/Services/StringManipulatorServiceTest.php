@@ -14,8 +14,20 @@ class StringManipulatorServiceTest extends TestCase
      */
     public function test_can_correctly_convert_to_uppercase()
     {
-        $string = new StringEntity('hello world');
-        StringManipulatorService::toAllUpperCase($string);
-        $this->assertEquals('HELLO WORLD', $string->get());
+        $roman = new StringEntity('hello world');
+        StringManipulatorService::toAllUpperCase($roman);
+        $this->assertEquals('HELLO WORLD', $roman->get());
+
+        $latin = new StringEntity('àáâãäåæçèéêëìíîïðñòóôõöøùúûüý');
+        StringManipulatorService::toAllUpperCase($latin);
+        $this->assertEquals('ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝ', $latin->get());
+
+        $non_latin = new StringEntity('Τάχιστη αλώπηξ βαφής ψημένη γη, δρασκελίζει υπέρ νωθρού κυνός');
+        StringManipulatorService::toAllUpperCase($non_latin);
+        $this->assertEquals('ΤΆΧΙΣΤΗ ΑΛΏΠΗΞ ΒΑΦΉΣ ΨΗΜΈΝΗ ΓΗ, ΔΡΑΣΚΕΛΊΖΕΙ ΥΠΈΡ ΝΩΘΡΟΎ ΚΥΝΌΣ', $non_latin->get());
+
+        $multibyte = new StringEntity('白日依山尽ぃぅぇぉっゃ！。《》');
+        StringManipulatorService::toAllUpperCase($multibyte);
+        $this->assertEquals('白日依山尽ぃぅぇぉっゃ！。《》', $multibyte->get());
     }
 }
