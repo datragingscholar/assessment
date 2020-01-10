@@ -21,7 +21,7 @@ class StringManipulatorService
     public static function toAlternateCase(StringEntity $stringEntity) : void
     {
         $characters = mb_str_split($stringEntity->get());
-        //var_dump($characters);
+
         $result = '';
         foreach ($characters as $key => $character) {
             if ($key % 2 == 0) {
