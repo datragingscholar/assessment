@@ -18,4 +18,17 @@ class StringEntityTest extends TestCase
         $this->assertIsString($stringEntity->get());
         $this->assertEquals('test string', $stringEntity->get());
     }
+
+    /**
+     * @test
+     * @covers StringEntity::updateString
+     */
+    public function test_can_update_string()
+    {
+        $stringEntity = new StringEntity('test string');
+        $stringEntity->updateString('new string');
+
+        $this->assertIsString($stringEntity->get());
+        $this->assertEquals('new string', $stringEntity->get());
+    }
 }
