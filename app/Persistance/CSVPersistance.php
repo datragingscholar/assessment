@@ -36,11 +36,22 @@ class CSVPersistance
     public function persist(StringEntity $stringEntity) : Bool
     {
         $string_data = $stringEntity->get();
-        $string_data = array_map('trim', preg_split('/(?<!^)(?!$)/u', $string_data));
+        $string_data = $this->splitStringToArrayByCharacter($string_data);
+        $string_data = $this->trimWhiteSpaceAsEmptyElement($string_data);
 
         $writer = Writer::createFromPath($this->path, 'w+');
         $writer->insertOne($string_data);
 
         return true;
+    }
+
+    protected function splitStringToArrayByCharacter(String $string) : Array
+    {
+        return preg_split('/(?<!^)(?!$)/u', $string);
+    }
+
+    protected function trimWhiteSpaceAsEmptyElement(Array $array) : Array
+    {
+        return array_map('trim', $array);
     }
 }
