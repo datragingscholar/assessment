@@ -34,4 +34,15 @@ class StringManipulatorServiceTest extends TestCase
         StringManipulatorService::toAllUpperCase($mixed);
         $this->assertEquals('1白!の日ΥΠΈΡ IS WHITÊ', $mixed->get());
     }
+
+    /**
+     * @test
+     * @covers StringManipulator::toAlternateCase
+     */
+    public function test_can_correctly_convert_to_alternate_case()
+    {
+        $roman = new StringEntity('hello world');
+        StringManipulatorService::toAlternateCase($roman);
+        $this->assertEquals('hElLo wOrLd', $roman->get());
+    }
 }
