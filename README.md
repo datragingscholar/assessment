@@ -106,9 +106,9 @@ with no real requirements to justify.
   directly conflicts with what the requirement needs, the possibility
   was since ignored to avoid over-design.
 - This project was written with it's own structure, except for the
-  console component helpers from Laravel, it has no dependency, and
-  should be able to be packed as a package or be extracted from
-  Laravel to run as a standalone service easily.
+  console component helpers from Laravel, it has no other dependency
+  to the framework, and should be able to be packed as a package or be
+  extracted from Laravel to run as a standalone service easily.
 
 ## Contact
 
