@@ -44,5 +44,21 @@ class StringManipulatorServiceTest extends TestCase
         $roman = new StringEntity('hello world');
         StringManipulatorService::toAlternateCase($roman);
         $this->assertEquals('hElLo wOrLd', $roman->get());
+
+        $latin = new StringEntity('àáâ ãäåæçèéêëìíîïðñòóôõöøùúûüý');
+        StringManipulatorService::toAlternateCase($latin);
+        $this->assertEquals('àÁâ ãÄåÆçÈéÊëÌíÎïÐñÒóÔõÖøÙúÛüÝ', $latin->get());
+
+        $non_latin = new StringEntity('Τάχιστη αλώπηξ βαφής ψημένη γη, δρασκελίζει υπέρ νωθρού κυνός');
+        StringManipulatorService::toAlternateCase($non_latin);
+        $this->assertEquals('τΆχΙσΤη αΛώΠηΞ ΒαΦήΣ ΨηΜέΝη γΗ, δΡαΣκΕλΊζΕι υΠέΡ ΝωΘρΟύ κΥνΌς', $non_latin->get());
+
+        $multibyte = new StringEntity('白日依山尽ぃぅぇぉっゃ！。《》');
+        StringManipulatorService::toAllUpperCase($multibyte);
+        $this->assertEquals('白日依山尽ぃぅぇぉっゃ！。《》', $multibyte->get());
+
+        $mixed = new StringEntity('WhiTê αΛ白！日ぇis NOT υΠ》ýæ');
+        StringManipulatorService::toAlternateCase($mixed);
+        $this->assertEquals('wHiTê αΛ白！日ぇiS NoT Υπ》ýÆ', $mixed->get());
     }
 }
