@@ -65,7 +65,7 @@ class CSVPersistance implements iStringPersistance
     {
         $this->throwExceptionIfPathNotValid();
 
-        $reader = Reader::createFromPath($this->path, 'r');
+        $reader = Reader::createFromPath($this->csvFilePath, 'r');
         $record_data = $reader->fetchOne(0);
         $record_data = $this->repopulateEmptyElementWithWhiteSpace($record_data);
         $record_data = $this->reconstructCharacterSplitArrayToString($record_data);
