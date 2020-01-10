@@ -45,10 +45,7 @@ class CSVPersistanceTest extends TestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        $this->csvPersistance = new CSVpersistance(
-            new StringFactory,
-            'ao9e8hib, .9/ ]==/='
-        );
+        $this->csvPersistance->setCSVFilePath('ao9e8hib, .9/ ]==/=');
     }
 
     /**
