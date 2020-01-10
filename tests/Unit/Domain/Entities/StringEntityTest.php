@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\Domain\Entities;
 
 use Tests\TestCase;
 use App\Domain\Entities\StringEntity;
