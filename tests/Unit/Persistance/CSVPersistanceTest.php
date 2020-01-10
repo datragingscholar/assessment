@@ -73,4 +73,30 @@ class CSVPersistanceTest extends TestCase
         $csvPersistance->persist($stringEntity);
         $this->assertEquals('白,!,",",の,日,υ,π,έ,ρ,,i,s,,W,h,I,t,ê,《,！', trim(file_get_contents($tmpFilePath)));
     }
+
+    /**
+     * @test
+     * @covers CSVPersistance::read
+     */
+    public function test_can_correctly_read()
+    {
+        $tmpFilePath = sys_get_temp_dir() . '/read_test.csv';
+        $csvPersistance = new CSVPersistance(
+            new StringFactory,
+            $tmpFilePath
+        );
+        $this->tmpFiles[] = $tmpFilePath;
+
+        $stringEntity = new StringEntity('hello world');
+        $csvPersistance->persist($stringEntity);
+        $stringEntityRead = $csvPersistance->read();
+        $this->assertInstanceOf(StringEntity::class, $stringEntityRead);
+        $this->assertEquals('hello world', $stringEntityRead->get());
+
+        $stringEntity = new StringEntity('白!,の日υπέρ is WhItê《！');
+        $csvPersistance->persist($stringEntity);
+        $stringEntityRead = $csvPersistance->read();
+        $this->assertInstanceOf(StringEntity::class, $stringEntityRead);
+        $this->assertEquals('白!,の日υπέρ is WhItê《！', $stringEntityRead->get());
+    }
 }
