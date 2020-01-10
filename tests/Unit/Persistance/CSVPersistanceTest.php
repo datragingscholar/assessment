@@ -53,6 +53,18 @@ class CSVPersistanceTest extends TestCase
      * @test
      * @covers CSVPersistance::persist
      */
+    public function test_should_not_persist_when_path_is_invalid()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        $csvPersistance = new CSVPersistance(new StringFactory);
+        $csvPersistance->persist(new StringEntity('hello world'));
+    }
+
+    /**
+     * @test
+     * @covers CSVPersistance::persist
+     */
     public function test_can_correctly_persist()
     {
         $tmpFilePath = sys_get_temp_dir() . '/persist_test.csv';

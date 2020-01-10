@@ -39,11 +39,13 @@ class CSVPersistance implements iStringPersistance
 
     public function persist(StringEntity $stringEntity) : Bool
     {
+        $this->throwExceptionIfPathNotValid();
+
         $string_data = $stringEntity->get();
         $string_data = $this->splitStringToArrayByCharacter($string_data);
         $string_data = $this->trimWhiteSpaceAsEmptyElement($string_data);
 
-        $writer = Writer::createFromPath($this->path, 'w+');
+        $writer = Writer::createFromPath($this->csvFilePath, 'w+');
         $writer->insertOne($string_data);
 
         return true;
