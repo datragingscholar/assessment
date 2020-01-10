@@ -4,8 +4,9 @@ namespace Tests\Unit\Domain\Services;
 
 use Tests\TestCase;
 use App\Domain\Entities\StringEntity;
+use App\Domain\Services\StringManipulatorService;
 
-class StringManipulatorService extends TestCase
+class StringManipulatorServiceTest extends TestCase
 {
     /**
      * @test
