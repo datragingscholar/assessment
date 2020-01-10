@@ -15,7 +15,7 @@ class StringManipulatorServiceTest extends TestCase
     public function test_can_correctly_convert_to_uppercase()
     {
         $string = new StringEntity('hello world');
-        StringManipulator::toAllUpperCase($string);
+        StringManipulatorService::toAllUpperCase($string);
         $this->assertEquals('HELLO WORLD', $string->get());
     }
 }
