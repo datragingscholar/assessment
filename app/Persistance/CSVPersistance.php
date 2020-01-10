@@ -17,9 +17,9 @@ class CSVPersistance implements iStringPersistance
         $this->stringFactory = $stringFactory;
     }
 
-    public function setCSVFilePath(String $csvFilePath) : void
+    public function setPath(String $path) : void
     {
-        $this->csvFilePath = $csvFilePath;
+        $this->csvFilePath = $path;
         $this->throwExceptionIfPathNotValid();
     }
 
@@ -32,7 +32,7 @@ class CSVPersistance implements iStringPersistance
         }
     }
 
-    public function currentCSVFilePath() : String
+    public function currentPath() : String
     {
         return $this->csvFilePath;
     }

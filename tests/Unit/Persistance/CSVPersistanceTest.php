@@ -27,26 +27,26 @@ class CSVPersistanceTest extends TestCase
 
     /**
      * @test
-     * @covers CSVPersistance::setCSVFilePath
+     * @covers CSVPersistance::setPath
      */
     public function test_can_set_and_get_path()
     {
         $tmpFilePath = sys_get_temp_dir() . '/path_test.csv';
-        $this->csvPersistance->setCSVFilePath($tmpFilePath);
+        $this->csvPersistance->setPath($tmpFilePath);
         $this->tmpFiles[] = $tmpFilePath;
 
-        $this->assertEquals($tmpFilePath, $this->csvPersistance->currentCSVFilePath());
+        $this->assertEquals($tmpFilePath, $this->csvPersistance->currentPath());
     }
 
     /**
      * @test
-     * @covers CSVPersistance::currentCSVFilePath
+     * @covers CSVPersistance::currentPath
      */
     public function test_path_should_be_valid()
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        $this->csvPersistance->setCSVFilePath('ao9e8hib, .9/ ]==/=');
+        $this->csvPersistance->setPath('ao9e8hib, .9/ ]==/=');
     }
 
     /**
@@ -68,7 +68,7 @@ class CSVPersistanceTest extends TestCase
     public function test_can_correctly_persist()
     {
         $tmpFilePath = sys_get_temp_dir() . '/persist_test.csv';
-        $this->csvPersistance->setCSVFilePath($tmpFilePath);
+        $this->csvPersistance->setPath($tmpFilePath);
         $this->tmpFiles[] = $tmpFilePath;
 
         $stringEntity = new StringEntity('hello world');
@@ -99,7 +99,7 @@ class CSVPersistanceTest extends TestCase
     public function test_can_correctly_read()
     {
         $tmpFilePath = sys_get_temp_dir() . '/read_test.csv';
-        $this->csvPersistance->setCSVFilePath($tmpFilePath);
+        $this->csvPersistance->setPath($tmpFilePath);
         $this->tmpFiles[] = $tmpFilePath;
 
         $stringEntity = new StringEntity('hello world');
