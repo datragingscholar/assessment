@@ -4,6 +4,7 @@ namespace Tests\Unit\Persistance;
 
 use Tests\TestCase;
 use App\Persistance\CSVPersistance;
+use App\Domain\Entities\StringFactory;
 
 class CSVPersistanceTest extends TestCase
 {
