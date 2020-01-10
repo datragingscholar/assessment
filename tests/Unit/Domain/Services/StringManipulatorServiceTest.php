@@ -29,5 +29,9 @@ class StringManipulatorServiceTest extends TestCase
         $multibyte = new StringEntity('白日依山尽ぃぅぇぉっゃ！。《》');
         StringManipulatorService::toAllUpperCase($multibyte);
         $this->assertEquals('白日依山尽ぃぅぇぉっゃ！。《》', $multibyte->get());
+
+        $mixed = new StringEntity('1白!の日υπέρ is WhItê');
+        StringManipulatorService::toAllUpperCase($mixed);
+        $this->assertEquals('1白!の日ΥΠΈΡ IS WHITÊ', $mixed->get());
     }
 }
