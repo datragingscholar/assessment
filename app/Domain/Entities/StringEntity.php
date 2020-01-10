@@ -15,4 +15,9 @@ class StringEntity
     {
         return $this->string;
     }
+
+    public function updateString(String $string) : void
+    {
+        $this->string = $string;
+    }
 }
