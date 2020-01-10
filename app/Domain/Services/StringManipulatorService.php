@@ -20,7 +20,7 @@ class StringManipulatorService
 
     public static function toAlternateCase(StringEntity $stringEntity) : void
     {
-        $characters = str_split($stringEntity->get());
+        $characters = mb_str_split($stringEntity->get());
         //var_dump($characters);
         $result = '';
         foreach ($characters as $key => $character) {
@@ -33,6 +33,11 @@ class StringManipulatorService
         }
 
         $stringEntity->updateString($result);
+    }
+
+    protected static function mb_str_split(String $string) : Array
+    {
+        return preg_split('/(?<!^)(?!$)/u', $string);
     }
 
     protected static function toLowerCase(String $string) : String
