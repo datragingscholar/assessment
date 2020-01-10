@@ -68,18 +68,15 @@ class CSVPersistanceTest extends TestCase
     public function test_can_correctly_persist()
     {
         $tmpFilePath = sys_get_temp_dir() . '/persist_test.csv';
-        $csvPersistance = new CSVPersistance(
-            new StringFactory,
-            $tmpFilePath
-        );
+        $this->csvPersistance->setCSVFilePath($tmpFilePath);
         $this->tmpFiles[] = $tmpFilePath;
 
         $stringEntity = new StringEntity('hello world');
-        $csvPersistance->persist($stringEntity);
+        $this->csvPersistance->persist($stringEntity);
         $this->assertEquals('h,e,l,l,o,,w,o,r,l,d', trim(file_get_contents($tmpFilePath)));
 
         $stringEntity = new StringEntity('白!,の日υπέρ is WhItê《！');
-        $csvPersistance->persist($stringEntity);
+        $this->csvPersistance->persist($stringEntity);
         $this->assertEquals('白,!,",",の,日,υ,π,έ,ρ,,i,s,,W,h,I,t,ê,《,！', trim(file_get_contents($tmpFilePath)));
     }
 
