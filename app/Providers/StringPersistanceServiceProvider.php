@@ -21,7 +21,7 @@ class StringPersistanceServiceProvider extends ServiceProvider
     {
         $this->app->when('App\Persistance\CSVPersistance')
             ->needs('$path')
-            ->give(getcwd() . '/test.csv');
+            ->give(__DIR__ . '/../../test.csv');
     }
 
     /**
